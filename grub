@@ -1,3 +1,5 @@
+## Полное описание (https://www.gnu.org/software/grub/manual/grub/grub.html)
+*************************************************************************
 sudo  nano /etc/default/grub
 
 GRUB_CMDLINE_LINUX_DEFAULT="rootfstype=ext4  libahci.ignore_sss=1 raid=noautodetect selinux=0 lpj=10986963"
