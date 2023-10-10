@@ -15,3 +15,47 @@ dmesg | grep 'lpj='
 
 
 sudo systemctl mask NetworkManager-wait-online.service
+
+
+*************************************************************
+
+Настройки PACMAN
+sudo nano /etc/pacman.conf
+Color
+ParallelDownloads = 10
+ILoveCandy
+Сохранить
+Добавить репозитории
+
+#chaotic-aur
+sudo pacman-key --recv-key FBA220DFC880C036 --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key FBA220DFC880C036
+sudo pacman -U --noconfirm 'https://cdn-mirror.chaotic.cx/chaotic... 'https://cdn-mirror.chaotic.cx/chaotic...
+sudo nano /etc/pacman.conf
+[chaotic-aur]
+Include = /etc/pacman.d/chaotic-mirrorlist
+
+#liquorix
+sudo pacman-key --recv-key 9AE4078033F8024D --keyserver hkps://keyserver.ubuntu.com
+sudo pacman-key --lsign-key 9AE4078033F8024D
+sudo nano /etc/pacman.conf
+[liquorix]
+Server = https://liquorix.net/archlinux/liquor...
+
+Установка ядра и поддержка старого оборудования
+pacman -Sy --noconfirm linux-lqx linux-lqx-headers linux-lqx-docs mkinitcpio-firmware
+
+Настройка GRUB
+sudo pacman -Sy --noconfirm grub-customizer
+Вставить
+quiet rootfstype=btrfs mitigations=off nowatchdog
+
+Настройка FSTAB
+sudo nano /etc/fstab
+вставить там где btrfs 
+noatime,compress=zstd:2,
+
+Настройка Снимков
+sudo pacman -Sy --noconfirm timeshift grub-btrfs
+Обновление grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
